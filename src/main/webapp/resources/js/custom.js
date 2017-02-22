@@ -4,10 +4,14 @@
 $(document).ready(function(){
     $("main").show();
     var editor = CKEDITOR.replace("editor1");
-    var formData = $("form input").serialize();
 
+
+    var mainTopic = $("#mainTopic");
     var title = $("#title");
 
+    mainTopic.bind('input',function(){
+        $("#topicHeader").html($(this).val());
+    });
     title.bind('input',function(){
         $("#titleHeader").html($(this).val());
     });
@@ -19,9 +23,17 @@ $(document).ready(function(){
 
     $("#submit-btn").click(function(event) {
         event.preventDefault();
+        var formData = ({
+            _csrf:$("#_csrf").val(),
+            mainTopic: mainTopic.val(),
+            title:title.val(),
+            content:CKEDITOR.instances.editor1.getData()
+        });
+        console.log(formData);
         $.ajax({
             url: "/post",
             type: "post",
+            //DataType:'json',
             data: formData
         }).success(function(response){
             console.log(response);

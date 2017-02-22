@@ -24,17 +24,20 @@ import java.util.List;
 public class Main {
 
     private ContentRepository contentRepository;
+
     @Autowired
-    public void main(ContentRepository contentRepository){
+    public Main(ContentRepository contentRepository){
         this.contentRepository = contentRepository;
     }
 
-    @RequestMapping(value="/", method = RequestMethod.GET)
-    public ModelAndView indexGet(@ModelAttribute @Valid ContentForm contentForm, Principal principal,
-                                 ModelAndView modelAndView,BindingResult bindingResult){
-        modelAndView.addObject("contentForm",contentForm);
-        //if(principal != null)
+    @RequestMapping(value="/admin", method = RequestMethod.GET)
+    public ModelAndView indexGet(ContentForm contentForm, Principal principal,
+                                 ModelAndView modelAndView){
 
+        List<ContentForm> formData = contentRepository.findAll();
+
+        modelAndView.addObject("contentFormData",contentRepository.findAll());
+        modelAndView.addObject("contentForm",contentForm);
         modelAndView.setViewName("home/eHome");
         return  modelAndView;
     }
@@ -45,9 +48,10 @@ public class Main {
             PrintWriter writer = response.getWriter();
             //Writer writer = response.getWriter();
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
-            if(!bindingResult.hasErrors()){
+            if(bindingResult.hasErrors()){
                 writer.print(fieldErrors);
             }else{
+                contentRepository.save(contentForm);
                 writer.print("successful!");
             }
         }catch (Exception ex){

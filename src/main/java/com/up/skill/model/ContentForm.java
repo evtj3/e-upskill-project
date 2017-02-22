@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.print.attribute.standard.Media;
 
 /**
  * Created by jejeTabadzki on 2/16/2017.
@@ -12,14 +13,16 @@ import javax.persistence.*;
 @Table(name="contents")
 public class ContentForm {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    @NotBlank(message = "")
-    @NotEmpty(message = "Please Write a topic.")
+
+    @NotBlank(message = "Please write a topic")
     private String mainTopic;
-    @NotBlank(message = "Please Write a tile.")
+
+    @NotBlank(message = "Please write a tile.")
     private String title;
+
     private String content;
 
     public Integer getId() {
