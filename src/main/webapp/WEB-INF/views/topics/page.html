@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{resources/stylesheets/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{resources/stylesheets/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{resources/stylesheets/screen.css}">
+</head>
+<body>
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#"><i class="fa fa-database"></i> CITE IT UPSKILL E-LEARNING</a>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Settings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Help</a>
+            </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+            <div th:each="datas : *{contentTopics}">
+                <div class="nav nav-pills flex-column">
+                    <div th:inline="text" class="category"><i class="fa fa-bookmark-o"></i>
+                        [[${datas}]]
+                    </div>
+                </div>
+                <div th:each="data : *{contentData}">
+                    <ul th:if="${datas == data.mainTopic}" class="nav nav-pills flex-column">
+                        <li th:switch="${#request.getParameter('pages')}" class="nav-item">
+                            <a th:case="${data.title}" class="nav-link active" th:href="@{/topics(pages=${data.title})}">
+                                [[${data.title}]]
+                                <span class="sr-only">(current)</span>
+                            </a>
+                            <a th:case="*" class="nav-link" th:href="@{/topics(pages=${data.title})}">
+                                [[${data.title}]]
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <div th:each="data : *{content}">
+                <h1 id="topicHeader" th:text="${data.mainTopic}"></h1>
+                <h5 id="titleHeader" th:text="${data.title}"></h5>
+                <div class="contentData" th:utext="${data.content}"></div>
+            </div>
+        </main>
+    </div>
+</div>
+<script th:src="@{/resources/js/jquery-1.11.3.min.js}"></script>
+<script th:src="@{/resources/js/bootstrap.min.js}"></script>
+</body>
+</html>

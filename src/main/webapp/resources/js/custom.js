@@ -33,10 +33,15 @@ $(document).ready(function(){
         $.ajax({
             url: "/post",
             type: "post",
-            //DataType:'json',
+            DataType:'json',
             data: formData
         }).success(function(response){
             console.log(response);
+            if(response === "success"){
+                location.reload();
+            }else{
+
+            }
         }).error(function(a){
             console.log(a);
         });

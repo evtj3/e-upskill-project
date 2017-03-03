@@ -39,59 +39,24 @@
         <div class="container-fluid">
             <div class="row">
                 <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
-                    <ul th:each="data : *{contentFormData}" class="nav nav-pills flex-column">
-                        <li th:inline="text" class="category"><i class="fa fa-bookmark-o"></i>
-                            [[${data.mainTopic}]]</li>
-                        <li class="nav-item">
-                            <!--<a class="nav-link active" href="#">HTML Video <span class="sr-only">(current)</span></a>-->
-                            <a class="nav-link" href="#" th:inline="text">[[${data.title}]]</a>
-                        </li>
-                    </ul>
-                    <!--<ul class="nav nav-pills flex-column">
-                        <li class="category"><i class="fa fa-bookmark-o"></i> HTML5</li>
-                        <li class="nav-item">
-                            &lt;!&ndash;<a class="nav-link active" href="#">HTML Video <span class="sr-only">(current)</span></a>&ndash;&gt;
-                            <a class="nav-link" href="#">HTML Video</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Reports</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Analytics</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Export</a>
-                        </li>
-                    </ul>
-
-                    <ul class="nav nav-pills flex-column">
-                        <li class="category"><i class="fa fa-bookmark-o"></i> CSS</li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Nav item</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Nav item again</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">One more nav</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Another nav item</a>
-                        </li>
-                    </ul>
-
-                    <ul class="nav nav-pills flex-column">
-                        <li class="category"><i class="fa fa-bookmark-o"></i> JAVASCRIPT</li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Nav item again</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">One more nav</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Another nav item</a>
-                        </li>
-                    </ul>-->
+                    <div th:each="datas : *{contentFormDataTopic}">
+                        <div class="nav nav-pills flex-column">
+                            <div th:inline="text" class="category"><i class="fa fa-bookmark-o"></i>
+                                [[${datas}]]
+                            </div>
+                        </div>
+                        <div th:each="data : *{contentFormData}">
+                            <ul th:if="${datas == data.mainTopic}" class="nav nav-pills flex-column">
+                                <li class="nav-item">
+                                    <!--<a class="nav-link active" href="#">HTML Video <span class="sr-only">(current)</span></a>-->
+                                    <a class="nav-link" th:href="@{/topics(pages=${data.title})}" th:inline="text">
+                                        <i class="fa fa-link"></i>
+                                        [[${data.title}]]
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </nav>
 
                 <main style="display:none;" class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">

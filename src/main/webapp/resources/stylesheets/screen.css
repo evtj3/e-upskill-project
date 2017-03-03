@@ -46,7 +46,7 @@ h1 {
 /* Sidebar navigation */
 /* line 46, ../sass/screen.scss */
 .sidebar {
-  padding-left: 0;
+  padding-left: 14px;
   padding-right: 0;
 }
 

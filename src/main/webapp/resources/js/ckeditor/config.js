@@ -9,4 +9,5 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.uiColor = '#AADC6E';
     config.removeButtons = "Save,Form,Checkbox,Radio,TextField,Textarea,Button,Select,ImageButton,HiddenField,Language" +
         ",Iframe,Flash,NewPage,Preview,Templates,CreateDiv,About,ShowBlocks,Maximize";
+    //config.extraPlugins = 'imageuploader';
 };

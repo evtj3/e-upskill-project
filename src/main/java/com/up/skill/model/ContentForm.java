@@ -1,10 +1,7 @@
 package com.up.skill.model;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
-import javax.print.attribute.standard.Media;
 
 /**
  * Created by jejeTabadzki on 2/16/2017.
